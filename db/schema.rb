@@ -11,7 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160130075803) do
+ActiveRecord::Schema.define(version: 20160130111804) do
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "group_name",     limit: 255
+    t.string   "group_desc",     limit: 255
+    t.string   "drop_users",     limit: 255
+    t.string   "continue_users", limit: 255
+    t.integer  "start_year",     limit: 4
+    t.integer  "start_month",    limit: 4
+    t.integer  "start_day",      limit: 4
+    t.integer  "fin_year",       limit: 4
+    t.integer  "fin_month",      limit: 4
+    t.integer  "fin_day",        limit: 4
+    t.integer  "check_span",     limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "manages", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "group_id",   limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

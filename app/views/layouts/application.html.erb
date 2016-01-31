@@ -5,12 +5,19 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
 </head>
 <body>
   <div id="wrapper">
     <div id="CotentsHeader">
-    ここはコンテンツのヘッダー<br>
-    ここにはタイトルとログインボタン
+    <% if user_signed_in? %>
+      <%= link_to 'タイトル', "/users/#{current_user.id}", class: 'top' %>
+    <% else %>
+      <%= link_to 'タイトル', "/users/sign_in", class: 'top' %>
+    <% end %>
+
+    <%= link_to "サインアウト", destroy_user_session_path, method: :delete %>
+    ここはコンテンツのヘッダー
     </div>
   </div>
 
