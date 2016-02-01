@@ -3,9 +3,57 @@
   ここでグループページを作成する
 
   <div id="form_section">
+    <h1>新規グループの作成</h1>
+
     <%= form_for @group do |f| %>
+      <!-- グループ名の入力 -->
+      <h2>グループ名</h2>
       <%= f.text_field :group_name, placeholder: "グループの名前", class: "form-control" %>
+
+      <!-- グループ説明の入力 -->
+      <h2>グループの説明</h2>
+      <%= f.text_area :group_desc, placeholder: "グループの説明", style: 'width: 80%; height: 300px;', class: "form-control" %>
+
+      <!-- 開始年の入力 -->
+      <h2>開始日の設定</h2>
+      <%= f.date_field :start_year, placeholder: "開始年" %>
+      <!-- 開始月の入力 -->
+      <!-- 開始日の入力 -->
+
+      <!-- 終了年の入力 -->
+      <h2>終了日の設定</h2>
+      <%= f.date_field :end_year, placeholder: "終了年" %>
+      <!-- 終了月の入力 -->
+      <!-- 終了日の入力 -->
+      <!-- binding.pryの結果
+
+      [2] pry(#<#<Class:0x007fcce7de08f8>>)> params
+      => {"utf8"=>"✓",
+       "authenticity_token"=>
+        "obtUfOfUdaMRHu2m7g1SwNQ0WRD9UxkFCAMmDIf7ZKc6kdZlbBWlgBJyGQe2fV65H+qkx1bpzGZym+TM9YVqsA==",
+       "group"=>
+        {"group_name"=>"aaa",
+         "group_desc"=>"aaa",
+         "start_year"=>"2016-01-18",
+         "end_year"=>"2016-01-27"},
+       "commit"=>"送信",
+       "controller"=>"groups",
+       "action"=>"create"} -->
+
+
+      <!-- 周期の入力 -->
+      <h2>確認周期日数の設定</h2>
+      <%= f.number_field :end_year, in:1...8, placeholder: "確認周期日数" %>
+
+      <!-- ユーザーの招待 -->
+      <!--
+      招待の仕方をどうするのか考える必要あり
+      メールアドレス入力での実装でどうか？
+      -->
+
+
       <%= f.submit "送信", class: "btn btn-primary withripple" %>
+
     <% end %>
   </div>
 
