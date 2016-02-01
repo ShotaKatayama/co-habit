@@ -11,19 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160131081841) do
+ActiveRecord::Schema.define(version: 20160201102816) do
 
   create_table "groups", force: :cascade do |t|
     t.string   "group_name",     limit: 255
     t.string   "group_desc",     limit: 255
     t.string   "drop_users",     limit: 255
     t.string   "continue_users", limit: 255
-    t.integer  "start_year",     limit: 4
-    t.integer  "start_month",    limit: 4
-    t.integer  "start_day",      limit: 4
-    t.integer  "end_year",       limit: 4
-    t.integer  "end_month",      limit: 4
-    t.integer  "end_day",        limit: 4
+    t.date     "start_year"
+    t.date     "start_month"
+    t.date     "start_day"
+    t.date     "end_year"
+    t.date     "end_month"
+    t.date     "end_day"
     t.integer  "check_span",     limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
