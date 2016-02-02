@@ -5,14 +5,34 @@ class GroupsController < ApplicationController
   end
 
   def create
-  @group = Group.new(create_params)
-  binding.pry
-  unless @group.save
-    # ValidationエラーなどでDBに保存できない場合 new.html.erb を再表示
-    render 'new'
-  end
+    @group = Group.new(create_params)
+    unless @group.save
+      # ValidationエラーなどでDBに保存できない場合 new.html.erb を再表示
+      render 'new'
+    end
+
+    # フォームから得たアドレスを配列にして格納
+    i = 1
+    dest_ary = []
+    invite_user = "invite_user#{i}"
+    while params[:group]["#{invite_user}"] != nil do
+      dest_ary << params[:group]["#{invite_user}"]
+      i++
+      invite_user = "invite_user#{i}"
+    end
+
+    binding.pry
 
 
+=begin
+    # この瞬間に作成されたグループのURLをg_pageに代入
+    g_page = #個々のグループページのviewファイル編集後にパスを指定
+    # 引数：user, destination, g_page
+    # 配列の要素数だけループ
+    dest_ary.each { |destination|
+      ShareMailer.send_to_share(current_user, destination g_page).deliver
+    }
+=end
   end
 
 =begin

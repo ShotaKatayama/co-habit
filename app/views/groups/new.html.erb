@@ -47,9 +47,20 @@
 
       <!-- ユーザーの招待 -->
       <!--
-      招待の仕方をどうするのか考える必要あり
-      メールアドレス入力での実装でどうか？
+      メールの送信で招待を送る
+      [ivite_user1]の形でパラメータに含ませたい
       -->
+      <h2>ユーザーの招待</h2>
+      <%= f.email_field :invite_user1, placeholder: "ユーザー1" %>
+      <%= f.email_field :invite_user2, placeholder: "ユーザー2" %>
+      <%= f.email_field :invite_user3, placeholder: "ユーザー3" %>
+      <%= f.email_field :invite_user4, placeholder: "ユーザー4" %>
+      <%= f.email_field :invite_user5, placeholder: "ユーザー5" %>
+      <%= f.email_field :invite_user6, placeholder: "ユーザー6" %>
+      <%= f.email_field :invite_user7, placeholder: "ユーザー7" %>
+      <%= f.email_field :invite_user8, placeholder: "ユーザー8" %>
+      <%= f.email_field :invite_user9, placeholder: "ユーザー9" %>
+      <%= f.email_field :invite_user10, placeholder: "ユーザー10" %>
 
 
       <%= f.submit "送信", class: "btn btn-primary withripple" %>
