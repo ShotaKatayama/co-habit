@@ -15,24 +15,23 @@ class GroupsController < ApplicationController
     i = 1
     dest_ary = []
     invite_user = "invite_user#{i}"
-    while params[:group]["#{invite_user}"] != nil do
+    binding.pry
+    while params[:group]["#{invite_user}"] != "" do
       dest_ary << params[:group]["#{invite_user}"]
-      i++
+      i += 1
       invite_user = "invite_user#{i}"
+      binding.pry
     end
 
-    binding.pry
 
-
-=begin
     # この瞬間に作成されたグループのURLをg_pageに代入
-    g_page = #個々のグループページのviewファイル編集後にパスを指定
+    #個々のグループページのviewファイル編集後にパスを指定
+    g_page = "/groups/:id"
     # 引数：user, destination, g_page
     # 配列の要素数だけループ
     dest_ary.each { |destination|
       ShareMailer.send_to_share(current_user, destination g_page).deliver
     }
-=end
   end
 
 =begin
