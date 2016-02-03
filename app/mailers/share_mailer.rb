@@ -17,6 +17,6 @@ class ShareMailer < ApplicationMailer
     #フォームで得たアドレスを投入
     #ハッシュで得た値を配列化して、繰り返し処理
     mail  to: "#{@dest}",
-          subject: "#{@user.name}さんからグループの招待が届きました"
+          subject: "#{@user.email}さんからグループの招待が届きました"
   end
 end

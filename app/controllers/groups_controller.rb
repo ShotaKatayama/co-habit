@@ -1,36 +1,44 @@
 class GroupsController < ApplicationController
 
   def new
-    @group = Group.new
+    @group = Group.where('user_id : current_user.id').new
   end
 
   def create
-    @group = Group.new(create_params)
+    @group = Group.create(create_params)
+    # managesテーブルにデータを格納
+    Manage.create(user_id: current_user.id, group_id: @group.id)
+
+#    binding.pry
+
+=begin
     unless @group.save
       # ValidationエラーなどでDBに保存できない場合 new.html.erb を再表示
       render 'new'
     end
+=end
 
     # フォームから得たアドレスを配列にして格納
     i = 1
     dest_ary = []
     invite_user = "invite_user#{i}"
-    binding.pry
+#    binding.pry
     while params[:group]["#{invite_user}"] != "" do
       dest_ary << params[:group]["#{invite_user}"]
       i += 1
       invite_user = "invite_user#{i}"
-      binding.pry
     end
+    binding.pry
 
 
     # この瞬間に作成されたグループのURLをg_pageに代入
     #個々のグループページのviewファイル編集後にパスを指定
-    g_page = "/groups/:id"
+    g_page = "http://localhost:3000/groups/#{@group.id}"
+    #編集が必要 "/groups/:id"
     # 引数：user, destination, g_page
     # 配列の要素数だけループ
     dest_ary.each { |destination|
-      ShareMailer.send_to_share(current_user, destination g_page).deliver
+      ShareMailer.send_to_share(current_user, destination, g_page).deliver
     }
   end
 
@@ -59,7 +67,8 @@ class GroupsController < ApplicationController
   # Rails4からStrongParamaterと呼ばれる機能が追加されました。
   # セキュリティのため、permitメソッドで許可したパラメータ名しか取得できません。
   def create_params
-    params.require(:group).permit(:group_name, :group_desc, :start_year, :start_month, :end_year, :check_span)
+    @new_record = params.require(:group).permit(:group_name, :group_desc, :start_year, :start_month, :end_year, :check_span)
+#    binding.pry
   end
 
 end
