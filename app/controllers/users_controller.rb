@@ -19,8 +19,6 @@ class UsersController < ApplicationController
     @datum.each{ |date|
       @group_datum << Group.where(id: date.group_id)[0]
     }
-    @i = 0
-#    binding.pry
 
     #@group_datumの中はGroupモデルのインスタンスにする
 

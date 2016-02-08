@@ -1,7 +1,6 @@
 #userのshowメソッドで使う部分テンプレート
 <br>
 
-<%= link_to "#{@group_datum[@i].group_name}", "/groups/#{@group_datum[@i].id}", class: 'groups_list' %>
+<%= link_to "#{@group_datum[group_list_counter].group_name}", "/groups/#{@group_datum[group_list_counter].id}", class: 'groups_list' %>
 <br>
 
-<%= @i += 1 %>
