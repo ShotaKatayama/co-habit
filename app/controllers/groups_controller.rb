@@ -1,5 +1,13 @@
 class GroupsController < ApplicationController
 
+  def show
+    @user_id = current_user.id
+    @group_id = request.path_info.split("/")[2]
+
+    Manage.find_or_create_by(user_id: @user_id, group_id: @group_id)
+
+  end
+
   def new
     @group = Group.where('user_id : current_user.id').new
   end
