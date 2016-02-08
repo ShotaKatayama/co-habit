@@ -1,7 +1,12 @@
 <div id = "main">
 ここはuserのshow.html.erb<br>
-  <%= link_to 'グループページの作成', "/groups/new", class: 'new_group' %>
 
+  <h2>グループの一覧</h2>
+  <div class="contents row" >
+    <%= render partial: "group_list", collection: @group_datum %>
+  </div>
 
+  <h2>新規グループの作成</h2>
+  <%= link_to '作成', "/groups/new", class: 'new_group' %>
 
 </div>

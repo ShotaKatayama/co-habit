@@ -1,5 +1,6 @@
 class Group < ActiveRecord::Base
-  has_many :users, through: :manage
+  has_many :manages
+  has_many :users, through: :manages
 
   #accessor
   attr_accessor :invite_user1,
