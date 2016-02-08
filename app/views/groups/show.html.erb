@@ -1,8 +1,19 @@
 <div id = "main">
   ここはgroupのshow.html.erbです
   ここで
-  ・ユーザー
-  ・カレンダー
-  ・チャット
-  が表示されます
+
+  <!-- 参加ユーザーの一覧 -->
+  <h2>参加ユーザ一覧</h2>
+  <div class="contents row" >
+    <%= render partial: "group_members", collection: @group_members %>
+  </div>
+
+
+  <!-- 習慣カレンダーの表示 -->
+  <h2>カレンダー</h2>
+
+
+  <!-- チャット or コメント欄の表示 -->
+  <h2>チャット機能</h2>
+
 </div>

@@ -6,6 +6,8 @@ class GroupsController < ApplicationController
 
     Manage.find_or_create_by(user_id: @user_id, group_id: @group_id)
 
+    @group_members = Manage.where("group_id  = #{@group_id}")
+
   end
 
   def new
@@ -36,7 +38,7 @@ class GroupsController < ApplicationController
       i += 1
       invite_user = "invite_user#{i}"
     end
-    binding.pry
+#    binding.pry
 
 
     # この瞬間に作成されたグループのURLをg_pageに代入
