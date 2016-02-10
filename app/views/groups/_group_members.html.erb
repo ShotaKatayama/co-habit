@@ -1,5 +1,5 @@
 #groupのshowメソッドで使う部分テンプレート(メンバーの一覧)
 <br>
-<h3><%= @group_members[group_members_counter].user_id %></h3>
+<h3><%= User.where(id: @group_members[group_members_counter].user_id)[0].user_name %></h3>
 <br>
 
