@@ -2,29 +2,60 @@
 <html>
 <head>
   <title>CoHabit</title>
+
+  <!-- google fontの導入 -->
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800italic' rel='stylesheet' type='text/css'>
+
+  <link href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 
+<!-- pusher用の記述
+  <script src="https://js.pusher.com/3.0/pusher.min.js"></script>
+  <script>
+    // Enable pusher logging - don't include this in production
+    Pusher.log = function(message) {
+      if (window.console && window.console.log) {
+        window.console.log(message);
+      }
+    };
+
+    var pusher = new Pusher('2dff52767be49ec6b7d0', {
+      encrypted: true
+    });
+    var channel = pusher.subscribe('test_channel');
+
+    channel.bind('chat_event', function(data) {
+      console.log(data)
+      console.log(data.message)
+      var messagelog = document.getElementById('messagelog');
+      var messagediv = document.createElement('div');
+      messagediv.innerHTML = data.message;
+      messagelog.appendChild(messagediv);
+    });
+
+  </script>
+-->
+
 </head>
 <body>
-  <div id="wrapper">
+  <div id="container">
     <div id="CotentsHeader">
-    <% if user_signed_in? %>
-      <%= link_to 'タイトル', "/users/#{current_user.id}", class: 'top' %>
-    <% else %>
-      <%= link_to 'タイトル', "/users/sign_in", class: 'top' %>
-    <% end %>
-
-    <%= link_to "サインアウト", destroy_user_session_path, method: :delete %>
-    ここはコンテンツのヘッダー
+      <% if user_signed_in? %>
+        <%= link_to 'Co-Habit', "/users/#{current_user.id}", class: 'top_menu' %>
+      <% else %>
+        <%= link_to 'Co-Habit', "/users/sign_in", class: 'top_menu' %>
+      <% end %>
+      <% if user_signed_in? %>
+      <%= link_to "サインアウト", destroy_user_session_path, method: :delete, class: 'sign_out' %>
+      <% end %>
     </div>
+    <%= yield %>
+    <footer>
+      <p id="copyright">Copyright &copy; Co-habit運営事務局 All Rights Reserved.</p>
+    </footer>
   </div>
-
-<%= yield %>
-
-  <footer>
-    ここはfooterです
-  </footer>
 </body>
 </html>
