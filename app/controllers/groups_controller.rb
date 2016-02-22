@@ -1,6 +1,8 @@
 class GroupsController < ApplicationController
 
   def show
+
+    # managesテーブルへの登録をここでしている
     @user_id = current_user.id
     @group_id = request.path_info.split("/")[2]
 
