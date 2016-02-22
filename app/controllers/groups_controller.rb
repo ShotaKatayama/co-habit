@@ -1,22 +1,15 @@
 class GroupsController < ApplicationController
 
-  # before_action :testfunc, only: :show
-
-  # private def testfunc
-  #   binding.pry
-  # end
-
   def show
     # managesテーブルへの登録をここでしている
     @user_id = current_user.id
     @group_id = request.path_info.split("/")[2]
+    @g_num = Manage.where($g_g_num).order("group_num").last[:group_num]
 
-    Manage.find_or_create_by(user_id: @user_id, group_id: @group_id)
+    Manage.find_or_create_by(user_id: @user_id, group_id: @group_id, group_num: @g_num.to_i+1)
 
     @group_members = Manage.where("group_id  = #{@group_id}")
 
-
-    binding.pry
 =begin
 #Pusher用の記述
     Pusher.trigger('chat_event', 'my_event', {
@@ -33,7 +26,7 @@ message: params[:message]}
   def create
     @group = Group.create(create_params)
     # managesテーブルにデータを格納
-    Manage.create(user_id: current_user.id, group_id: @group.id)
+    Manage.create(user_id: current_user.id, group_id: @group.id, group_num: 1)
 
     # フォームから得たアドレスを配列にして格納
     i = 1
