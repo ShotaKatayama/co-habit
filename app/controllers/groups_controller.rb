@@ -1,7 +1,12 @@
 class GroupsController < ApplicationController
 
-  def show
+  # before_action :testfunc, only: :show
 
+  # private def testfunc
+  #   binding.pry
+  # end
+
+  def show
     # managesテーブルへの登録をここでしている
     @user_id = current_user.id
     @group_id = request.path_info.split("/")[2]
@@ -10,6 +15,8 @@ class GroupsController < ApplicationController
 
     @group_members = Manage.where("group_id  = #{@group_id}")
 
+
+    binding.pry
 =begin
 #Pusher用の記述
     Pusher.trigger('chat_event', 'my_event', {
