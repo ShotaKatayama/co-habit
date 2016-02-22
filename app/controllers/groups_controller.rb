@@ -8,6 +8,13 @@ class GroupsController < ApplicationController
 
     @group_members = Manage.where("group_id  = #{@group_id}")
 
+=begin
+#Pusher用の記述
+    Pusher.trigger('chat_event', 'my_event', {
+message: params[:message]}
+  )
+=end
+
   end
 
   def new
@@ -18,15 +25,6 @@ class GroupsController < ApplicationController
     @group = Group.create(create_params)
     # managesテーブルにデータを格納
     Manage.create(user_id: current_user.id, group_id: @group.id)
-
-#    binding.pry
-
-=begin
-    unless @group.save
-      # ValidationエラーなどでDBに保存できない場合 new.html.erb を再表示
-      render 'new'
-    end
-=end
 
     # フォームから得たアドレスを配列にして格納
     i = 1
@@ -52,23 +50,23 @@ class GroupsController < ApplicationController
     }
   end
 
-=begin
-      ※createメソッド用のメモ
-      ※入力されたparamsの中身
-      <!-- binding.pryの結果
-      [2] pry(#<#<Class:0x007fcce7de08f8>>)> params
-      => {"utf8"=>"✓",
-       "authenticity_token"=>
-        "obtUfOfUdaMRHu2m7g1SwNQ0WRD9UxkFCAMmDIf7ZKc6kdZlbBWlgBJyGQe2fV65H+qkx1bpzGZym+TM9YVqsA==",
-       "group"=>
-        {"group_name"=>"aaa",
-         "group_desc"=>"aaa",
-         "start_year"=>"2016-01-18",
-         "end_year"=>"2016-01-27"},
-       "commit"=>"送信",
-       "controller"=>"groups",
-       "action"=>"create"} -->
-=end
+  def pushercreate
+
+    Pusher['general_channel'].trigger('chat_event', {
+      message: params[:message]
+      })
+      #render :text => 'OK', :status => 200 and return
+      #ここまでならinternal server errorは発生しない
+
+
+    redirect_to :action => 'show'
+    # どうしても最後のこの部分でエラーが発生する
+    # ActionController::UrlGenerationError (No route matches {:action=>"show", :controller=>"groups"}):
+    # app/controllers/groups_controller.rb:58:in `pushercreate'
+
+
+  end
+
 
   def edit
   end

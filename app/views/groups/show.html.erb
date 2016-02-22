@@ -11,9 +11,33 @@
 
   <!-- 習慣カレンダーの表示 -->
   <h2>カレンダー</h2>
+  <div id = "calendar">
+  </div>
 
-
-  <!-- チャット or コメント欄の表示 -->
+  <!-- チャット or コメント欄の表示
   <h2>チャット機能</h2>
+  <%= form_tag('/groups/pushercreate', remote: true) do %>
+    <%= text_field_tag 'message' %>
+    <%= submit_tag 'send', data: { disable_with: "送信中..." } %>
+  <% end %>
+
+  <div id='messagelog'></div>
+-->
+
+<!-- カレンダーへの色つけJS -->
+  <script>
+  $(document).ready(function() {
+      $('#calendar').fullCalendar({
+      })
+
+      $(".fc-day.fc-widget-content.fc-today").click(function(){
+        var newdiv = $('<li class = "newdiv">').text("just added");
+        $('.fc-day.fc-widget-content.fc-today').append(newdiv);
+        $('.newdiv').css("background", "green");
+      });
+
+  });
+  </script>
+<!-- カレンダーへの色つけJS終了 -->
 
 </div>

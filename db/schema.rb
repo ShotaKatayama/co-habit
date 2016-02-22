@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160201102816) do
+ActiveRecord::Schema.define(version: 20160210062001) do
 
   create_table "groups", force: :cascade do |t|
     t.string   "group_name",     limit: 255
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20160201102816) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string   "user_name",              limit: 255
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
     t.string   "reset_password_token",   limit: 255

@@ -1,17 +1,121 @@
 body {
-  width:700px;
+  background-color: #DCDCDC;
+}
+
+div#container {
+  width:900px;
   margin-right: auto;
   margin-left : auto;
+  padding: 10px 30px;
+  background-color: white;
+
 }
 
+/* コンテンツ内のヘッダーについての記述 */
 div#CotentsHeader {
-  background-color: blue;
+  background-color: #1E90FF;
+  position: relative;
+  border-radius: 10px;
+  margin-bottom: 15px;
 }
 
-div#main {
-  background-color: red;
+a.top_menu {
+  display: block;
+  padding: 10px;
+  color: black;
+  font-size: 30px;
+  font-weight: lighter;
+
+/*  font-family: 'Open Sans', sans-serif;
+*/
+  font-family: 'Righteous', cursive;
+
 }
 
+a.sign_out{
+  float: right;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+
+  background-color: #1abc9c;
+  border-radius: 4px;
+  color: #fff;
+  line-height: 30px;
+  -webkit-transition: none;
+  transition: none;
+  box-shadow: 0 3px 0 #0e8c73;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+
+}
+
+a.sign_out:hover {
+  background-color: #31c8aa;
+  box-shadow: 0 3px 0 #23a188;
+}
+a.sign_out:active {
+  top: 3px;
+  box-shadow: none;
+}
+
+
+div#CotentsHeader a {
+  text-decoration: none;
+}
+
+/* ユーザーページについて（topページ） */
+div.group_list_section {
+  height: 128px;
+  width: 128px;
+  margin: 10px;
+  padding: 5px;
+  border-style: dashed;
+  border-color: black;
+  border-radius: 10px;
+  float: left;
+}
+
+div.group_list_section:hover {
+  background-color: #C0C0C0;
+}
+
+div.group_list_section:active {
+  top: 3px;
+  box-shadow: none;
+}
+
+div.group_list_section a {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+/* 新規グループページについて */
+div#form_section {
+
+}
+
+.form-control {
+  border-radius: 5px;
+}
+
+/* フッターについての記述 */
 footer{
-  background-color: green;
+  clear: both;
+  background-color: #1E90FF;
+
+  margin-top: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+
+}
+
+#copyright {
+    text-align: center;
+}
+
+
+/* スマホ用 */
+@media screen and (max-width: 480px) {
 }

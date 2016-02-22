@@ -1,12 +1,10 @@
 <div id = "main">
-ここはuserのshow.html.erb<br>
+  <h2>共有している習慣</h2>
+  <%= render partial: "group_list", collection: @group_datum %>
 
-  <h2>グループの一覧</h2>
-  <div class="contents row" >
-    <%= render partial: "group_list", collection: @group_datum %>
+  <div class = "group_list_section">
+    <%= link_to image_tag('/assets/plus-sign_M.png', {:alt => '新規習慣作成', :class => "new_habit"}), "/groups/new", :class => "new_link" %>
   </div>
 
-  <h2>新規グループの作成</h2>
-  <%= link_to '作成', "/groups/new", class: 'new_group' %>
 
 </div>

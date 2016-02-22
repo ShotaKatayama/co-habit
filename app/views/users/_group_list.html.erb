@@ -1,6 +1,5 @@
-#userのshowメソッドで使う部分テンプレート
-<br>
+<div class="group_list_section">
+  <%= link_to "#{@group_datum[group_list_counter].group_name}", "/groups/#{@group_datum[group_list_counter].id}", class: 'groups_list' %>
+</div>
 
-<%= link_to "#{@group_datum[group_list_counter].group_name}", "/groups/#{@group_datum[group_list_counter].id}", class: 'groups_list' %>
-<br>
 
