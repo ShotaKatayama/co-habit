@@ -1,7 +1,5 @@
-<h3>ユーザー名：
+<h3 style="background: <%= @color_array[@group_members[group_members_counter].group_num-1] %>">ユーザー名：
   <%= User.where(id: @group_members[group_members_counter].user_id)[0].user_name %>
-  ：
-  <%= @group_members[group_members_counter].group_num %>
 
   <% if @group_members[group_members_counter].group_num == 1 %>
     管理者

@@ -10,6 +10,12 @@ class GroupsController < ApplicationController
 
     @group_members = Manage.where("group_id  = #{@group_id}")
 
+
+    @color_array = ["red", "blue", "green", "yellow", "pink", "purple"]
+    gon.color_array = @color_array
+
+    gon.user_color_index = Manage.where("user_id = #{current_user.id}").where("group_id = #{@group_id}")[0].group_num-1
+
 =begin
 #Pusher用の記述
     Pusher.trigger('chat_event', 'my_event', {

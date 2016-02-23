@@ -33,7 +33,7 @@
       $(".fc-day.fc-widget-content.fc-today").click(function(){
         var newdiv = $('<li class = "newdiv">').text("just added");
         $('.fc-day.fc-widget-content.fc-today').append(newdiv);
-        $('.newdiv').css("background", "green");
+        $('.newdiv').css("background", gon.color_array[gon.user_color_index]);
       });
 
   });
