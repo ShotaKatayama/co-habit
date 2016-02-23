@@ -7,4 +7,7 @@ class User < ActiveRecord::Base
   has_many :manages
   has_many :groups, through: :manages
 
+  has_many :continues
+  has_many :drops
+
 end

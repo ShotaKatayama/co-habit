@@ -2,6 +2,9 @@ class Group < ActiveRecord::Base
   has_many :manages
   has_many :users, through: :manages
 
+  has_many :continues
+  has_many :drops
+
   #accessor
   attr_accessor :invite_user1,
                 :invite_user2,
