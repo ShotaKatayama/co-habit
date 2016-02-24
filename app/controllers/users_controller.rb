@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+    before_action :check_groups, only: :show
+
   def show
     #Groupモデルを使用することに対してエラー発生
     @datum = Manage.where(user_id: current_user.id)
@@ -21,6 +23,13 @@ class UsersController < ApplicationController
     }
     #@group_datumの中はGroupモデルのインスタンスにする
 
+  end
+
+  private
+  def check_groups
+    #この関数で定時処理を行う
+#    Time.now
+#これで現在時刻を取得
   end
 
 end

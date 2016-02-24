@@ -22,7 +22,9 @@
 
       <!-- 周期の入力 -->
       <h2>確認周期日数の設定</h2>
-      <%= f.number_field :check_span, in:1...8, placeholder: "確認周期日数", class: "form-control" %>
+      <%= f.number_field :check_span, in:1...8, placeholder: "確認周期日数", class: "form-control check_span" %>
+
+      <%= f.hidden_field :check_span_counter, class: "check_span_counter" %>
 
       <!-- ユーザーの招待 -->
       <!--
@@ -46,5 +48,12 @@
 
     <% end %>
   </div>
+  <script type="text/javascript">
+    $(function () {
+        $(".check_span").on("keyup change", function () {
+            $(".check_span_counter").val($(this).val());
+        });
+    });
+  </script>
 
 </div>
