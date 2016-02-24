@@ -20,11 +20,24 @@
 
   <div id='messagelog'></div>
 -->
+<!--
+  <% if Continue.exists?(:user_id => current_user.id, :group_id => @group_id) %>
+    <button type="submit" disabled="disabled">実施済み</button>
+  <% else %>
+    <button type="submit" class = "mark_calendar">習慣の実施</button onclick = <%= check_habit(current_user.id, @group_id) %>>
+  <% end %> -->
 
-  <button type="submit" class = "mark_calendar">習慣の実施</button onclick = <%= check_habit(current_user.id, @group_id) %>>
+ <button type="submit" class = "mark_calendar">習慣の実施</button onclick = <%= check_habit(current_user.id, @group_id) %>>
 
 <!-- カレンダーへの色つけJS -->
-  <script>
+  <script type="text/javascript">
+
+  if (window.name != "xyz")
+  {
+    location.reload();
+    window.name = "xyz";
+  }
+
   $(document).ready(function() {
       $('#calendar').fullCalendar({
       })
@@ -36,10 +49,8 @@
 
         $(".mark_calendar").prop("disabled", true);
         $(".mark_calendar").text("pushed");
-
       });
   });
-  </script>
-<!-- カレンダーへの色つけJS終了 -->
 
+  </script>
 </div>
