@@ -1,7 +1,4 @@
 <div id = "main">
-  ここはgroupのshow.html.erbです
-  ここで
-
   <!-- 参加ユーザーの一覧 -->
   <h2>参加ユーザ一覧</h2>
   <div class="contents row" >
@@ -24,16 +21,22 @@
   <div id='messagelog'></div>
 -->
 
+  <button type="submit" class = "mark_calendar">習慣の実施</button onclick = <%= check_habit(current_user.id, @group_id) %>>
+
 <!-- カレンダーへの色つけJS -->
   <script>
   $(document).ready(function() {
       $('#calendar').fullCalendar({
       })
 
-      $(".fc-day.fc-widget-content.fc-today").click(function(){
-        var newdiv = $('<li class = "newdiv">').text("just added");
+      $(".mark_calendar").click(function(){
+        var newdiv = $('<li class = "newdiv">').text("did habit!!");
         $('.fc-day.fc-widget-content.fc-today').append(newdiv);
         $('.newdiv').css("background", gon.color_array[gon.user_color_index]);
+
+        $(".mark_calendar").prop("disabled", true);
+        $(".mark_calendar").text("pushed");
+
       });
 
   });
