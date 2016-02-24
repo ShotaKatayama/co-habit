@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160223111402) do
+ActiveRecord::Schema.define(version: 20160224003458) do
 
   create_table "continues", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20160223111402) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "continues", ["user_id", "group_id"], name: "index_continues_on_user_id_and_group_id", unique: true, using: :btree
 
   create_table "drops", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
