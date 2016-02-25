@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224055104) do
+ActiveRecord::Schema.define(version: 20160225063542) do
 
   create_table "continues", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20160224055104) do
     t.date     "end_day"
     t.integer  "check_span",         limit: 4
     t.integer  "check_span_counter", limit: 4
+    t.date     "last_check_day"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
