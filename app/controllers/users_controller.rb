@@ -45,7 +45,7 @@ class UsersController < ApplicationController
     var_dumm2.each{ |date, i|
       # 作成が今日か否か
       # 作成が今日の場合は処理なし
-      #if date.last_check_day != Date.today
+      if date.last_check_day != Date.today
         # 新規グループか既存グループか
         if date.last_check_day == nil #初めてcheckを通るグループ
           last_day = date.start_year
@@ -66,7 +66,7 @@ class UsersController < ApplicationController
           update_check_span_counter(date, past_days)
           last_check_stamp(date)
         end
-      #end
+      end
     }
   end
 
