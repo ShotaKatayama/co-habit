@@ -16,6 +16,8 @@ class GroupsController < ApplicationController
 
     gon.user_color_index = Manage.where("user_id = #{current_user.id}").where("group_id = #{@group_id}")[0].group_num-1
 
+    # 該当するグループのdropsテーブルに名前があるユーザーの情報の配列
+    @drop_users = Drop.where(group_id: @group_id )
 
 =begin
 #Pusher用の記述
@@ -78,6 +80,31 @@ message: params[:message]}
 
 
   def edit
+    @group = Group.find(params[:id])
+    @group_info = Group.where(id: params[:id])
+  end
+
+  def update
+    Group.find(params[:id]).update(update_params)
+    redirect_to :root
+  end
+
+  def destroy
+    group = Group.find(params[:id])
+    #continues
+    Continue.where(group_id: group.id).each{|continue|
+      continue.destroy
+    }
+    #drops
+    Drop.where(group_id: group.id).each{|drop|
+      drop.destroy
+    }
+    #manages
+    Manage.where(group_id: group.id).each{|manage|
+      manage.destroy
+    }
+    group.destroy
+    redirect_to :root
   end
 
   private
@@ -85,6 +112,10 @@ message: params[:message]}
   # セキュリティのため、permitメソッドで許可したパラメータ名しか取得できません。
   def create_params
     @new_record = params.require(:group).permit(:group_name, :group_desc, :start_year, :start_month, :end_year, :check_span, :check_span_counter)
-#    binding.pry
   end
+
+  def update_params
+    params.require(:group).permit(:group_name, :group_desc, :start_year, :end_year, :check_span, :check_span_counter)
+  end
+
 end

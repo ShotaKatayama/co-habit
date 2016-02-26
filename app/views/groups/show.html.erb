@@ -46,9 +46,19 @@
       $('#calendar').fullCalendar({
       })
 
+        var nil_div = $('<div class>').text("　")
+        // var newdiv = $('<div class = "newdiv">').text("did habit!!");
+        // $('.'+gon.user_color_index).append(nil_div);
+        // $('.fc-day.fc-widget-content.fc-today').append(newdiv);
+
+        // $('.newdiv').css("background", gon.color_array[gon.user_color_index]);
+
+
       $(".mark_calendar").click(function(){
-        var newdiv = $('<li class = "newdiv">').text("did habit!!");
+        var newdiv = $('<div class = "newdiv">').text("did habit!!");
+        $('.fc-day.fc-widget-content.fc-today').append(nil_div);
         $('.fc-day.fc-widget-content.fc-today').append(newdiv);
+
         $('.newdiv').css("background", gon.color_array[gon.user_color_index]);
 
         $(".mark_calendar").prop("disabled", true);

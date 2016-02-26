@@ -57,3 +57,5 @@ gem 'pusher'
 gem 'gon'
 
 gem 'devise-i18n'
+
+gem 'rails_12factor'
