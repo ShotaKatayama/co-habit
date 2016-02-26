@@ -30,7 +30,7 @@
 
     <!-- request.path_info.split("/")[2] -->
     <!-- session[:user_return_to]でログイン後の遷移URLにアクセスできる -->
-    <% if session[:user_return_to].include?("/groups/") %>
+    <% if session[:user_return_to] != nil  && session[:user_return_to].include?("/groups/") %>
       <div class="set_num">
         <%= fields_for resource.manages do |manage| %>
             <%= manage.hidden_field :group_num, value: $g_g_num = session[:user_return_to].split('/')[2] %>
