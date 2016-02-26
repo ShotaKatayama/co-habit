@@ -27,7 +27,9 @@
     <button type="submit" class = "mark_calendar">習慣の実施</button onclick = <%= check_habit(current_user.id, @group_id) %>>
   <% end %> -->
 
- <button type="submit" class = "mark_calendar">習慣の実施</button onclick = <%= check_habit(current_user.id, @group_id) %>>
+ <button type="submit" class = "mark_calendar button">習慣の実施</button onclick = <%= check_habit(current_user.id, @group_id) %>>
+
+  <%= link_to '一覧に戻る', "/users/#{current_user.id}", class: 'return_button button' %>
 
 <!-- カレンダーへの色つけJS -->
   <script type="text/javascript">

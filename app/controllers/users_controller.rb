@@ -43,8 +43,6 @@ class UsersController < ApplicationController
 
     #var_dumm2に格納されているグループのインスタンスごとに処理を実行
     var_dumm2.each{ |date, i|
-      # 作成が今日か否か
-      # 作成が今日の場合は処理なし
       if date.last_check_day != Date.today
         # 新規グループか既存グループか
         if date.last_check_day == nil #初めてcheckを通るグループ
