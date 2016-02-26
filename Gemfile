@@ -58,4 +58,6 @@ gem 'gon'
 
 gem 'devise-i18n'
 
-gem 'rails_12factor'
+group :production, :staging do
+  gem 'rails_12factor'
+end
