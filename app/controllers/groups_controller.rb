@@ -52,7 +52,8 @@ message: params[:message]}
 
     # この瞬間に作成されたグループのURLをg_pageに代入
     #個々のグループページのviewファイル編集後にパスを指定
-    g_page = "http://localhost:3000/groups/#{@group.id}"
+
+    g_page = "https://co-habit.herokuapp.com/groups/#{@group.id}"
     #編集が必要 "/groups/:id"
     # 引数：user, destination, g_page
     # 配列の要素数だけループ
