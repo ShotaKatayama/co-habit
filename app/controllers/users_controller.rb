@@ -43,26 +43,28 @@ class UsersController < ApplicationController
 
     #var_dumm2に格納されているグループのインスタンスごとに処理を実行
     var_dumm2.each{ |date, i|
-      if date.last_check_day != Date.today
-        # 新規グループか既存グループか
-        if date.last_check_day == nil #初めてcheckを通るグループ
-          last_day = date.start_year
-          past_days = count_days(last_day)
+      if date != nil
+        if date.last_check_day != Date.today
+          # 新規グループか既存グループか
+          if date.last_check_day == nil #初めてcheckを通るグループ
+            last_day = date.start_year
+            past_days = count_days(last_day)
 
-          if past_days < 0
-            # 習慣の始まりが将来及び今日の場合、処理は実行されない
-          elsif past_days > 0
-            # 数日経過している場合
+            if past_days < 0
+              # 習慣の始まりが将来及び今日の場合、処理は実行されない
+            elsif past_days > 0
+              # 数日経過している場合
+              update_check_span_counter(date, past_days)
+              last_check_stamp(date)
+            else
+              last_check_stamp(date)
+            end
+          else #checkが通るのが複数回目
+            last_day = date.last_check_day
+            past_days = count_days(last_day)
             update_check_span_counter(date, past_days)
             last_check_stamp(date)
-          else
-            last_check_stamp(date)
           end
-        else #checkが通るのが複数回目
-          last_day = date.last_check_day
-          past_days = count_days(last_day)
-          update_check_span_counter(date, past_days)
-          last_check_stamp(date)
         end
       end
     }

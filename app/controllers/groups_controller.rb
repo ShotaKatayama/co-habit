@@ -19,6 +19,9 @@ class GroupsController < ApplicationController
     # 該当するグループのdropsテーブルに名前があるユーザーの情報の配列
     @drop_users = Drop.where(group_id: @group_id )
 
+    # user_idとgroup_idを入れたら日付と色識別番号がハッシュとなった配列が返ってくるメソッド
+    # create_color_date(user_id, group_id)
+
 =begin
 #Pusher用の記述
     Pusher.trigger('chat_event', 'my_event', {
@@ -60,6 +63,7 @@ message: params[:message]}
     dest_ary.each { |destination|
       ShareMailer.send_to_share(current_user, destination, g_page).deliver
     }
+    redirect_to :root
   end
 
   def pushercreate
@@ -119,4 +123,21 @@ message: params[:message]}
     params.require(:group).permit(:group_name, :group_desc, :start_year, :end_year, :check_span, :check_span_counter)
   end
 
+  def color_index_create(user_id, group_id)
+    color_index = Manage.where(user_id: user_id, group_id: group_id)[0].group_num
+    return color_index
+  end
+
+  def continue_date_create(user_id, group_id)
+    continue_date = Continue.where(user_id: user_id, group_id: group_id)[0].created_at.to_date
+    return continue_date
+  end
+
+  def create_color_date(user_id, group_id)
+    color_date_ary = []
+    color_date_set = {:"#{continue_date_create(user_id, group_id)}" => color_index_create(user_id, group_id)}
+    color_date_ary << color_date_set
+    # ハッシュが複数入った配列を返り値とする
+    return color_date_ary
+  end
 end

@@ -45,25 +45,23 @@
   $(document).ready(function() {
       $('#calendar').fullCalendar({
       })
-
+        // 空のdivを宣言
         var nil_div = $('<div class>').text("　")
-        // var newdiv = $('<div class = "newdiv">').text("did habit!!");
-        // $('.'+gon.user_color_index).append(nil_div);
-        // $('.fc-day.fc-widget-content.fc-today').append(newdiv);
 
-        // $('.newdiv').css("background", gon.color_array[gon.user_color_index]);
+        // ボタンを押すと実行される
+        $(".mark_calendar").click(function(){
+          var newdiv = $('<div class = "newdiv">').text("did habit!!");
+          // 空のdivを追加
+          $('.fc-day.fc-widget-content.fc-today').append(nil_div);
+          // 目的のdivを追加
+          $('.fc-day.fc-widget-content.fc-today').append(newdiv);
+          // 目的のdivの色を指定
+          $('.newdiv').css("background", gon.color_array[gon.user_color_index]);
 
-
-      $(".mark_calendar").click(function(){
-        var newdiv = $('<div class = "newdiv">').text("did habit!!");
-        $('.fc-day.fc-widget-content.fc-today').append(nil_div);
-        $('.fc-day.fc-widget-content.fc-today').append(newdiv);
-
-        $('.newdiv').css("background", gon.color_array[gon.user_color_index]);
-
-        $(".mark_calendar").prop("disabled", true);
-        $(".mark_calendar").text("pushed");
-      });
+          // ボタンの操作無効化
+          $(".mark_calendar").prop("disabled", true);
+          $(".mark_calendar").text("pushed");
+        });
   });
 
   </script>
