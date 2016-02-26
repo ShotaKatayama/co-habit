@@ -64,6 +64,10 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
+
+
+
+
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
@@ -80,4 +84,17 @@ Rails.application.configure do
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
   config.serve_static_assets = true
+
+  config.action_mailer.default_url_options = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address => 'smtp.gmail.com',
+    :port => 587,
+    :domain => 'smtp.gmail.com', # if local,  localhost.localdomain    
+    :user_name => "cohabit.share@gmail.com", # full email address (user@your.host.name.com)
+    :password => "cohabitpass",
+    :authentication => 'login',
+    :enable_starttls_auto => true,
+  }
+
 end
