@@ -1,7 +1,11 @@
-<li style="background: <%= @color_array[@group_members[group_members_counter].group_num-1] %>">ユーザー名：
+<li style="list-style-type:square; color: <%= @color_array[@group_members[group_members_counter].group_num-1] %>;">
+  <span style="color:#333;">ユーザー名：
   <%= User.where(id: @group_members[group_members_counter].user_id)[0].user_name %>
-
   <% if @group_members[group_members_counter].group_num == 1 %>
-    管理者
+    （<%= link_to '管理者ページ', "/groups/#{@group_id}/edit" %> ）
   <% end %>
+  <ul>
+    <li>未実施回数：<%= count_drop(@group_members[group_members_counter].user_id, @drop_users) %> => 罰金額：<%= 1000 * count_drop(@group_members[group_members_counter].user_id, @drop_users) %>円</li>
+  </ul>
+  </span>
 </li>
