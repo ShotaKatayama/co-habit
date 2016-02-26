@@ -53,3 +53,7 @@ gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 
 gem 'pusher'
+
+gem 'gon'
+
+gem 'devise-i18n'

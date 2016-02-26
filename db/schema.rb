@@ -11,20 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160210062001) do
+ActiveRecord::Schema.define(version: 20160225063542) do
+
+  create_table "continues", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "group_id",   limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "continues", ["user_id", "group_id"], name: "index_continues_on_user_id_and_group_id", unique: true, using: :btree
+
+  create_table "drops", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "group_id",   limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "groups", force: :cascade do |t|
-    t.string   "group_name",     limit: 255
-    t.string   "group_desc",     limit: 255
-    t.string   "drop_users",     limit: 255
-    t.string   "continue_users", limit: 255
+    t.string   "group_name",         limit: 255
+    t.string   "group_desc",         limit: 255
+    t.string   "drop_users",         limit: 255
+    t.string   "continue_users",     limit: 255
     t.date     "start_year"
     t.date     "start_month"
     t.date     "start_day"
     t.date     "end_year"
     t.date     "end_month"
     t.date     "end_day"
-    t.integer  "check_span",     limit: 4
+    t.integer  "check_span",         limit: 4
+    t.integer  "check_span_counter", limit: 4
+    t.date     "last_check_day"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -32,9 +50,12 @@ ActiveRecord::Schema.define(version: 20160210062001) do
   create_table "manages", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.integer  "group_id",   limit: 4
+    t.integer  "group_num",  limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "manages", ["user_id", "group_id"], name: "index_manages_on_user_id_and_group_id", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "user_name",              limit: 255

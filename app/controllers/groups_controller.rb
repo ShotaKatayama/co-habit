@@ -1,12 +1,21 @@
 class GroupsController < ApplicationController
 
   def show
+    # managesテーブルへの登録をここでしている
     @user_id = current_user.id
     @group_id = request.path_info.split("/")[2]
+    @g_num = Manage.where($g_g_num).order("group_num").last[:group_num]
 
-    Manage.find_or_create_by(user_id: @user_id, group_id: @group_id)
+    Manage.find_or_create_by(user_id: @user_id, group_id: @group_id, group_num: @g_num.to_i+1)
 
     @group_members = Manage.where("group_id  = #{@group_id}")
+
+
+    @color_array = ["red", "blue", "green", "yellow", "pink", "purple"]
+    gon.color_array = @color_array
+
+    gon.user_color_index = Manage.where("user_id = #{current_user.id}").where("group_id = #{@group_id}")[0].group_num-1
+
 
 =begin
 #Pusher用の記述
@@ -24,7 +33,7 @@ message: params[:message]}
   def create
     @group = Group.create(create_params)
     # managesテーブルにデータを格納
-    Manage.create(user_id: current_user.id, group_id: @group.id)
+    Manage.create(user_id: current_user.id, group_id: @group.id, group_num: 1)
 
     # フォームから得たアドレスを配列にして格納
     i = 1
@@ -75,8 +84,7 @@ message: params[:message]}
   # Rails4からStrongParamaterと呼ばれる機能が追加されました。
   # セキュリティのため、permitメソッドで許可したパラメータ名しか取得できません。
   def create_params
-    @new_record = params.require(:group).permit(:group_name, :group_desc, :start_year, :start_month, :end_year, :check_span)
+    @new_record = params.require(:group).permit(:group_name, :group_desc, :start_year, :start_month, :end_year, :check_span, :check_span_counter)
 #    binding.pry
   end
-
 end

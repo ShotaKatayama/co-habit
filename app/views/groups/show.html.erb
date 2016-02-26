@@ -1,11 +1,10 @@
 <div id = "main">
-  ここはgroupのshow.html.erbです
-  ここで
-
   <!-- 参加ユーザーの一覧 -->
   <h2>参加ユーザ一覧</h2>
   <div class="contents row" >
-    <%= render partial: "group_members", collection: @group_members %>
+    <ul>
+     <%= render partial: "group_members", collection: @group_members %>
+    </ul>
   </div>
 
 
@@ -23,21 +22,39 @@
 
   <div id='messagelog'></div>
 -->
+<!--
+  <% if Continue.exists?(:user_id => current_user.id, :group_id => @group_id) %>
+    <button type="submit" disabled="disabled">実施済み</button>
+  <% else %>
+    <button type="submit" class = "mark_calendar">習慣の実施</button onclick = <%= check_habit(current_user.id, @group_id) %>>
+  <% end %> -->
+
+ <button type="submit" class = "mark_calendar button">習慣の実施</button onclick = <%= check_habit(current_user.id, @group_id) %>>
+
+  <%= link_to '一覧に戻る', "/users/#{current_user.id}", class: 'return_button button' %>
 
 <!-- カレンダーへの色つけJS -->
-  <script>
+  <script type="text/javascript">
+
+  if (window.name != "xyz")
+  {
+    location.reload();
+    window.name = "xyz";
+  }
+
   $(document).ready(function() {
       $('#calendar').fullCalendar({
       })
 
-      $(".fc-day.fc-widget-content.fc-today").click(function(){
-        var newdiv = $('<li class = "newdiv">').text("just added");
+      $(".mark_calendar").click(function(){
+        var newdiv = $('<li class = "newdiv">').text("did habit!!");
         $('.fc-day.fc-widget-content.fc-today').append(newdiv);
-        $('.newdiv').css("background", "green");
+        $('.newdiv').css("background", gon.color_array[gon.user_color_index]);
+
+        $(".mark_calendar").prop("disabled", true);
+        $(".mark_calendar").text("pushed");
       });
-
   });
-  </script>
-<!-- カレンダーへの色つけJS終了 -->
 
+  </script>
 </div>

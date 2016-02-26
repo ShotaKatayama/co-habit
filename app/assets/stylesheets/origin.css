@@ -1,121 +1,297 @@
-body {
-  background-color: #DCDCDC;
-}
+@media screen and (min-width:480px){
 
-div#container {
-  width:900px;
-  margin-right: auto;
-  margin-left : auto;
-  padding: 10px 30px;
-  background-color: white;
+  body {
+    background-color: #DCDCDC;
+  }
 
-}
+  div#container {
+    width:900px;
+    margin-right: auto;
+    margin-left : auto;
+    padding: 10px 30px;
+    background-color: white;
 
-/* コンテンツ内のヘッダーについての記述 */
-div#CotentsHeader {
-  background-color: #1E90FF;
-  position: relative;
-  border-radius: 10px;
-  margin-bottom: 15px;
-}
+  }
 
-a.top_menu {
-  display: block;
-  padding: 10px;
-  color: black;
-  font-size: 30px;
-  font-weight: lighter;
+  /* コンテンツ内のヘッダーについての記述 */
+  div#CotentsHeader {
+    background-color: #1E90FF;
+    position: relative;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
 
-/*  font-family: 'Open Sans', sans-serif;
-*/
-  font-family: 'Righteous', cursive;
+  a.top_menu {
+    display: block;
+    padding: 10px;
+    color: black;
+    font-size: 30px;
+    font-weight: lighter;
 
-}
+  /*  font-family: 'Open Sans', sans-serif;
+  */
+    font-family: 'Righteous', cursive;
 
-a.sign_out{
-  float: right;
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
+  }
 
-  background-color: #1abc9c;
-  border-radius: 4px;
-  color: #fff;
-  line-height: 30px;
-  -webkit-transition: none;
-  transition: none;
-  box-shadow: 0 3px 0 #0e8c73;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+  a.sign_out{
+    float: right;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
 
-}
+    background-color: #1abc9c;
+    border-radius: 4px;
+    color: #fff;
+    line-height: 30px;
+    -webkit-transition: none;
+    transition: none;
+    box-shadow: 0 3px 0 #0e8c73;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
 
-a.sign_out:hover {
-  background-color: #31c8aa;
-  box-shadow: 0 3px 0 #23a188;
-}
-a.sign_out:active {
-  top: 3px;
-  box-shadow: none;
-}
+  }
+
+  a.sign_out:hover {
+    background-color: #31c8aa;
+    box-shadow: 0 3px 0 #23a188;
+  }
+  a.sign_out:active {
+    top: 3px;
+    box-shadow: none;
+  }
 
 
-div#CotentsHeader a {
-  text-decoration: none;
-}
+  div#CotentsHeader a {
+    text-decoration: none;
+  }
 
-/* ユーザーページについて（topページ） */
-div.group_list_section {
-  height: 128px;
-  width: 128px;
-  margin: 10px;
-  padding: 5px;
-  border-style: dashed;
-  border-color: black;
-  border-radius: 10px;
-  float: left;
-}
+  /* ユーザーページについて（topページ） */
+  div.group_list_section {
+    height: 128px;
+    width: 128px;
+    margin: 10px;
+    padding: 5px;
+    border-style: dashed;
+    border-color: black;
+    border-radius: 10px;
+    float: left;
+    position: relative;
+  }
 
-div.group_list_section:hover {
-  background-color: #C0C0C0;
-}
+  div.group_list_section:hover {
+    background-color: #C0C0C0;
+  }
 
-div.group_list_section:active {
-  top: 3px;
-  box-shadow: none;
-}
+  div.group_list_section:active {
+    top: 3px;
+    box-shadow: none;
+  }
 
-div.group_list_section a {
-  display: block;
-  height: 100%;
-  width: 100%;
-}
+  div.group_list_section a {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
 
-/* 新規グループページについて */
-div#form_section {
+  div.label {
+    width: 95%;
+    position: absolute;
+    bottom: 0px;
+    border-radius: 0px 0px 10px 10px;
 
-}
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: ;
 
-.form-control {
-  border-radius: 5px;
-}
+  }
 
-/* フッターについての記述 */
-footer{
-  clear: both;
-  background-color: #1E90FF;
+  /* 新規グループページについて */
+  div#form_section {
 
-  margin-top: 15px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-radius: 10px;
+  }
 
-}
+  .form-control {
+    border-radius: 5px;
+  }
 
-#copyright {
+  /* フッターについての記述 */
+  footer{
+    clear: both;
+    background-color: #1E90FF;
+
+    margin-top: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+
+  }
+
+  #copyright {
+      text-align: center;
+  }
+
+  /* サインイン画面について */
+  div.signin_section, div.login_section {
+    width: 450px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 15px;
     text-align: center;
-}
+    border-radius: 10px;
 
+
+    background-color: #DCDCDC;
+  }
+}
 
 /* スマホ用 */
 @media screen and (max-width: 480px) {
+
+  body {
+    background-color: #DCDCDC;
+  }
+
+  div#container {
+    margin-right: auto;
+    margin-left : auto;
+    padding: 10px 30px;
+    background-color: white;
+
+  }
+
+  /* コンテンツ内のヘッダーについての記述 */
+  div#CotentsHeader {
+    background-color: #1E90FF;
+    position: relative;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+
+  div#main > * {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  a.top_menu {
+    display: block;
+    padding: 10px;
+    color: black;
+    font-size: 30px;
+    font-weight: lighter;
+
+  /*  font-family: 'Open Sans', sans-serif;
+  */
+    font-family: 'Righteous', cursive;
+
+  }
+
+  a.sign_out{
+    float: right;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+
+    background-color: #1abc9c;
+    border-radius: 4px;
+    color: #fff;
+    line-height: 30px;
+    -webkit-transition: none;
+    transition: none;
+    box-shadow: 0 3px 0 #0e8c73;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+
+  }
+
+  a.sign_out:hover {
+    background-color: #31c8aa;
+    box-shadow: 0 3px 0 #23a188;
+  }
+  a.sign_out:active {
+    top: 3px;
+    box-shadow: none;
+  }
+
+
+  div#CotentsHeader a {
+    text-decoration: none;
+  }
+
+  /* ユーザーページについて（topページ） */
+  #main h2{
+    text-align: center;
+  }
+
+
+  div.group_list_section {
+    height: 128px;
+    width: 128px;
+    margin: 10px;
+    padding: 5px;
+    border-style: dashed;
+    border-color: black;
+    border-radius: 10px;
+    position: relative;
+  }
+
+  div.group_list_section:hover {
+    background-color: #C0C0C0;
+  }
+
+  div.group_list_section:active {
+    top: 3px;
+    box-shadow: none;
+  }
+
+  div.group_list_section a {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+
+  div.label {
+    width: 95%;
+    position: absolute;
+    bottom: 0px;
+    border-radius: 0px 0px 10px 10px;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+  }
+
+  /* 新規グループページについて */
+  div#form_section {
+
+  }
+
+  .form-control {
+    border-radius: 5px;
+  }
+
+  /* フッターについての記述 */
+  footer{
+    clear: both;
+    background-color: #1E90FF;
+
+    margin-top: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+
+  }
+
+  #copyright {
+      text-align: center;
+  }
+
+  /* サインイン画面について */
+  div.signin_section, div.login_section {
+    width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #DCDCDC;
+  }
+
 }
