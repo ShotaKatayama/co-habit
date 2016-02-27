@@ -45,24 +45,76 @@
   $(document).ready(function() {
       $('#calendar').fullCalendar({
       })
-        // 空のdivを宣言
-        var nil_div = $('<div class>').text("　")
 
-        // ボタンを押すと実行される
-        $(".mark_calendar").click(function(){
-          var newdiv = $('<div class = "newdiv">').text("did habit!!");
+        // 表示されている年月を取得
+        var t_year = $(".fc-center").text().split(" ")[1];
+        var t_month = $(".fc-center").text().split("")[0];
+        if (t_month.split("").length == 1) {
+          var t_month = "0"+t_month;
+        }
+
+        // endのみ数値型
+        var end = getMonthEndDay(t_year, t_month);
+
+        // 日ごとの繰り返し処理
+        for(i = 0; i <= end; i++){
+          // 判定のためのiを加工(加工後は文字列型に)
+          var j_i = i;
+          j_i = String(j_i);
+          if (j_i.split("").length == 1) {
+            var j_i = "0"+j_i;
+          }
+
+          // 空のdivを宣言
+          var null_div = $('<div class = "nulldiv">').text("nulldiv");
           // 空のdivを追加
-          $('.fc-day.fc-widget-content.fc-today').append(nil_div);
-          // 目的のdivを追加
-          $('.fc-day.fc-widget-content.fc-today').append(newdiv);
-          // 目的のdivの色を指定
-          $('.newdiv').css("background", gon.color_array[gon.user_color_index]);
+          $(".fc-widget-content[data-date ="+t_year+'-'+t_month+'-'+j_i+"]").append(null_div);
 
-          // ボタンの操作無効化
-          $(".mark_calendar").prop("disabled", true);
-          $(".mark_calendar").text("pushed");
-        });
+          // mark_yearの生成
+          var mark_year = gon.color_date[0][0].split("-")[0];
+          // mark_monthの生成
+          var mark_month = gon.color_date[0][0].split("-")[1];
+          // mark_dayの生成
+          if (gon.color_date[0][0].split("-")[2].split("")[0] == 0) {
+            // 一桁
+            var mark_day = gon.color_date[0][0].split("-")[2].split("")[1];
+          } else {
+            // 二桁
+            var mark_day = gon.color_date[0][0].split("-")[2];
+          }
+
+          var j = 0;
+          while(gon.color_date[j] != null){
+            if (t_year == mark_year && t_month == mark_month && j_i == mark_day){
+              var continue_mark = $('<div class = "continue_mark">').text("　");
+              $(".fc-widget-content[data-date ="+gon.color_date[j][0]+"]").append(continue_mark);
+              $('.continue_mark').css("background", gon.color_array[gon.color_date[j][1]-1]);
+              j++
+            }
+
+          }
+        }
+
+      $(".mark_calendar").click(function(){
+        var newmark = $('<div class = "newmark continue_mark">').text("　");
+          // 目的のdivを追加
+        $('.fc-day.fc-widget-content.fc-today').append(newmark);
+          // 目的のdivの色を指定
+        $('.newmark').css("background", gon.color_array[gon.user_color_index]);
+
+        // ボタンの操作無効化
+        $(".mark_calendar").prop("disabled", true);
+        $(".mark_calendar").text("pushed");
+      });
   });
 
+
+  function getMonthEndDay(year, month) {
+      //日付を0にすると前月の末日を指定したことになります
+      //指定月の翌月の0日を取得して末日を求めます
+      //そのため、ここでは month - 1 は行いません
+      var dt = new Date(year, month, 0);
+      return dt.getDate();
+  }
   </script>
 </div>

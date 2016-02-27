@@ -17,10 +17,15 @@ class GroupsController < ApplicationController
     gon.user_color_index = Manage.where("user_id = #{current_user.id}").where("group_id = #{@group_id}")[0].group_num-1
 
     # 該当するグループのdropsテーブルに名前があるユーザーの情報の配列
-    @drop_users = Drop.where(group_id: @group_id )
+    @drop_users = Drop.where(group_id: @group_id)
 
-    # user_idとgroup_idを入れたら日付と色識別番号がハッシュとなった配列が返ってくるメソッド
-    # create_color_date(user_id, group_id)
+    # create_color_date()はuser_idとgroup_idを入れたら日付と色識別番号が配列で返ってくるメソッド
+    @color_date = []
+    @group_members.each{|member|
+      @color_date << create_color_date(member.user_id, member.group_id)
+    }
+    # この結果、color_dateは二重配列
+    gon.color_date = @color_date
 
 =begin
 #Pusher用の記述
@@ -134,10 +139,15 @@ message: params[:message]}
   end
 
   def create_color_date(user_id, group_id)
-    color_date_ary = []
-    color_date_set = {:"#{continue_date_create(user_id, group_id)}" => color_index_create(user_id, group_id)}
-    color_date_ary << color_date_set
-    # ハッシュが複数入った配列を返り値とする
-    return color_date_ary
+    # ハッシュ版
+    # color_date_set = {:"#{continue_date_create(user_id, group_id)}" => color_index_create(user_id, group_id)}
+
+    # 配列版 インデックス:0が日付、:1が色の識別番号
+    color_date_set =[]
+    color_date_set << continue_date_create(user_id, group_id)
+    color_date_set << color_index_create(user_id, group_id)
+
+    # 配列を返り値とする
+    return color_date_set
   end
 end

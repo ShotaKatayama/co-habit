@@ -4,6 +4,10 @@
     background-color: #DCDCDC;
   }
 
+  .newmark, .continue_mark{
+    border-radius: 5px;
+  }
+
   div#container {
     width:900px;
     margin-right: auto;
