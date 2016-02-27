@@ -7,7 +7,7 @@ $(document).ready(function () {
             // title, prev, next, prevYear, nextYear, today
             left: 'prev,next today',
             center: 'title',
-            right: 'month agendaWeek agendaDay'
+            right: 'month'
         },
         // jQuery UI theme
         theme: false,
