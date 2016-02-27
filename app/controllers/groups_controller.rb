@@ -22,7 +22,7 @@ class GroupsController < ApplicationController
     # create_color_date()はuser_idとgroup_idを入れたら日付と色識別番号が配列で返ってくるメソッド
     @color_date = []
     @group_members.each{|member|
-      @color_date << create_color_date(member.user_id, member.group_id)
+        @color_date << create_color_date(member.user_id, member.group_id)
     }
     # この結果、color_dateは二重配列
     gon.color_date = @color_date
@@ -144,8 +144,10 @@ message: params[:message]}
 
     # 配列版 インデックス:0が日付、:1が色の識別番号
     color_date_set =[]
-    color_date_set << continue_date_create(user_id, group_id)
-    color_date_set << color_index_create(user_id, group_id)
+    if Continue.where(user_id: user_id, group_id: group_id) != nil
+      color_date_set << continue_date_create(user_id, group_id)
+      color_date_set << color_index_create(user_id, group_id)
+    end
 
     # 配列を返り値とする
     return color_date_set
