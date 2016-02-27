@@ -49,7 +49,6 @@ gem 'devise'
 gem 'pry-rails'
 
 
-gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 
 gem 'pusher'
