@@ -144,7 +144,7 @@ message: params[:message]}
 
     # 配列版 インデックス:0が日付、:1が色の識別番号
     color_date_set =[]
-    if Continue.where(user_id: user_id, group_id: group_id) != nil
+    unless Continue.where(user_id: user_id, group_id: group_id).empty?
       color_date_set << continue_date_create(user_id, group_id)
       color_date_set << color_index_create(user_id, group_id)
     end
