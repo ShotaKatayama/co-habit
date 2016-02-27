@@ -22,7 +22,6 @@ class GroupsController < ApplicationController
     # create_color_date()はuser_idとgroup_idを入れたら日付と色識別番号が配列で返ってくるメソッド
     @color_date = []
     @group_members.each{|member|
-      if member != nil
       @color_date << create_color_date(member.user_id, member.group_id)
     }
     # この結果、color_dateは二重配列
