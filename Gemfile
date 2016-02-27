@@ -57,6 +57,7 @@ gem 'pusher'
 gem 'gon'
 
 gem 'devise-i18n'
+gem 'therubyracer'
 
 group :production, :staging do
   gem 'rails_12factor'
