@@ -26,6 +26,7 @@ class GroupsController < ApplicationController
     }
     # この結果、color_dateは二重配列
     gon.color_date = @color_date
+
 =begin
 #Pusher用の記述
     Pusher.trigger('chat_event', 'my_event', {
@@ -40,34 +41,38 @@ message: params[:message]}
   end
 
   def create
-    @group = Group.create(create_params)
-    # managesテーブルにデータを格納
-    Manage.create(user_id: current_user.id, group_id: @group.id, group_num: 1)
+    unless Group.new(create_params).valid?
+      redirect_to :action => "new"
+    else
+      # managesテーブルにデータを格納
+      @group = Group.create(create_params)
+      Manage.create(user_id: current_user.id, group_id: @group.id, group_num: 1)
 
-    # フォームから得たアドレスを配列にして格納
-    i = 1
-    dest_ary = []
-    invite_user = "invite_user#{i}"
-#    binding.pry
-    while params[:group]["#{invite_user}"] != "" do
-      dest_ary << params[:group]["#{invite_user}"]
-      i += 1
+      # フォームから得たアドレスを配列にして格納
+      i = 1
+      dest_ary = []
       invite_user = "invite_user#{i}"
+  #    binding.pry
+      while params[:group]["#{invite_user}"] != "" do
+        dest_ary << params[:group]["#{invite_user}"]
+        i += 1
+        invite_user = "invite_user#{i}"
+      end
+  #    binding.pry
+
+
+      # この瞬間に作成されたグループのURLをg_pageに代入
+      #個々のグループページのviewファイル編集後にパスを指定
+
+      g_page = "https://co-habit.herokuapp.com/groups/#{@group.id}"
+      #編集が必要 "/groups/:id"
+      # 引数：user, destination, g_page
+      # 配列の要素数だけループ
+      dest_ary.each { |destination|
+        ShareMailer.send_to_share(current_user, destination, g_page).deliver
+      }
+      redirect_to :root
     end
-#    binding.pry
-
-
-    # この瞬間に作成されたグループのURLをg_pageに代入
-    #個々のグループページのviewファイル編集後にパスを指定
-
-    g_page = "https://co-habit.herokuapp.com/groups/#{@group.id}"
-    #編集が必要 "/groups/:id"
-    # 引数：user, destination, g_page
-    # 配列の要素数だけループ
-    dest_ary.each { |destination|
-      ShareMailer.send_to_share(current_user, destination, g_page).deliver
-    }
-    redirect_to :root
   end
 
   def pushercreate

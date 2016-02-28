@@ -86,9 +86,11 @@
             }
 
             if (t_year == mark_year && t_month == mark_month && j_i == mark_day){
-              var continue_mark = $('<div class = "continue_mark">').text("　");
+              alert("カレンダーの色つけの部の中");
+              var tag1 = '.continue_mark '
+              var tag2 = '.'+gon.color_date[eval("j")][0]
+              var continue_mark = $('<div class ='+eval("tag2")+eval("tag1")+'>').text("　").css("background", gon.color_array[gon.color_date[j][1]-1]).css("border-radius", "5px");
               $(".fc-widget-content[data-date ="+gon.color_date[j][0]+"]").append(continue_mark);
-              $('.continue_mark').css("background", gon.color_array[gon.color_date[j][1]-1]);
             }
 
             j++;

@@ -6,5 +6,4 @@ class Manage < ActiveRecord::Base
     :uniqueness => {
       :scope => [:group_id]}
 
-
 end
