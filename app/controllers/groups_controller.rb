@@ -23,9 +23,11 @@ class GroupsController < ApplicationController
     @color_date = []
     @group_members.each{|member|
         @color_date << create_color_date(member.user_id, member.group_id)
+
     }
     # この結果、color_dateは二重配列
     gon.color_date = @color_date
+
 
 =begin
 #Pusher用の記述
@@ -138,7 +140,7 @@ message: params[:message]}
   end
 
   def continue_date_create(user_id, group_id)
-    continue_date = Continue.where(user_id: user_id, group_id: group_id)[0].created_at.to_date
+    continue_date = Continue.where(user_id: user_id, group_id: group_id)[0].created_day.to_date
     return continue_date
   end
 

@@ -1,5 +1,5 @@
 <li style="list-style-type:square; color: <%= @color_array[@group_members[group_members_counter].group_num-1] %>;">
-  <span style="color:#333;">ユーザー名：
+  <span style="color:#333;">
   <%= User.where(id: @group_members[group_members_counter].user_id)[0].user_name %>
   <% if @group_members[group_members_counter].group_num == 1 %>
     （<%= link_to '管理者ページ', "/groups/#{@group_id}/edit" %> ）

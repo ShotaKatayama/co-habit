@@ -86,7 +86,6 @@
             }
 
             if (t_year == mark_year && t_month == mark_month && j_i == mark_day){
-              alert("カレンダーの色つけの部の中");
               var tag1 = '.continue_mark '
               var tag2 = '.'+gon.color_date[eval("j")][0]
               var continue_mark = $('<div class ='+eval("tag2")+eval("tag1")+'>').text("　").css("background", gon.color_array[gon.color_date[j][1]-1]).css("border-radius", "5px");
