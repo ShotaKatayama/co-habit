@@ -22,89 +22,24 @@
 
   <div id='messagelog'></div>
 -->
-<!--
-  <% if Continue.exists?(:user_id => current_user.id, :group_id => @group_id) %>
+
+  <% if Continue.exists?(:user_id => current_user.id, :group_id => @group_id, :created_day => Date.today) %>
     <button type="submit" disabled="disabled">実施済み</button>
   <% else %>
-    <button type="submit" class = "mark_calendar">習慣の実施</button onclick = <%= check_habit(current_user.id, @group_id) %>>
-  <% end %> -->
+      <%= button_tag "push", type: "submit", class: "mark_calendar button", onclick: "#{check_habit(current_user.id, @group_id)} "%>
 
- <button type="submit" class = "mark_calendar button">習慣の実施</button onclick = <%= check_habit(current_user.id, @group_id) %>>
+      <%= button_tag "push", type: "submit", class: "mark_calendar button", onclick: "checker(#{current_user.id}, #{@group_id})"%>
+  <% end %>
 
   <%= link_to '一覧に戻る', "/users/#{current_user.id}", class: 'return_button button' %>
 
 <!-- カレンダーへの色つけJS -->
   <script type="text/javascript">
+
   $(document).ready(function() {
       $('#calendar').fullCalendar({
 
-        header: {
-            // title, prev, next, prevYear, nextYear, today
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month'
-        },
-        // jQuery UI theme
-        theme: false,
-        // 最初の曜日
-        firstDay: 1, // 1:月曜日
-        // 土曜、日曜を表示
-        weekends: true,
-        // 週モード (fixed, liquid, variable)
-        weekMode: 'fixed',
-        // 週数を表示
-        weekNumbers: false,
-        // 高さ(px)
-        //height: 700,
-        // コンテンツの高さ(px)
-        //contentHeight: 600,
-        // カレンダーの縦横比(比率が大きくなると高さが縮む)
-        //aspectRatio: 1.35,
-        // ビュー表示イベント
-        viewDisplay: function(view) {
-            //alert('ビュー表示イベント ' + view.title);
-        },
-        // ウィンドウリサイズイベント
-        windowResize: function(view) {
-            //alert('ウィンドウリサイズイベント');
-        },
-        // 日付クリックイベント
-        dayClick: function () {
-            //alert('日付クリックイベント');
-        },
-
-        // 列の書式
-        columnFormat: {
-            month: 'ddd',    // 月
-            week: "d'('ddd')'", // 7(月)
-            day: "d'('ddd')'" // 7(月)
-        },
-
-        // ボタン文字列
-        buttonText: {
-            today:    '今日',
-            month:    '月',
-            week:     '週',
-            day:      '日'
-        },
-        // 月名称
-        monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-        // 月略称
-        monthNamesShort: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-        // 曜日名称
-        dayNames: ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'],
-        // 曜日略称
-        dayNamesShort: ['日', '月', '火', '水', '木', '金', '土'],
-
-        // イベントソース
-        eventSources: [
-            {
-                events: [
-                ]
-            }
-        ]
-
-      })
+      });
 
         // 表示されている年月を取得
         var t_year = $(".fc-center").text().split(" ")[1];
@@ -116,10 +51,13 @@
         // endのみ数値型
         var end = getMonthEndDay(t_year, t_month);
 
+
+
         // 日ごとの繰り返し処理
-        for(i = 0; i <= end; i++){
+        for(i = 0, j=0; i <= end; i++){
+          j=0;
           // 判定のためのiを加工(加工後は文字列型に)
-          var j_i = i;
+          var j_i = i+1;
           j_i = String(j_i);
           if (j_i.split("").length == 1) {
             var j_i = "0"+j_i;
@@ -130,30 +68,31 @@
           // 空のdivを追加
           $(".fc-widget-content[data-date ="+t_year+'-'+t_month+'-'+j_i+"]").append(null_div);
 
-          // mark_yearの生成
-          var mark_year = gon.color_date[0][0].split("-")[0];
-          // mark_monthの生成
-          var mark_month = gon.color_date[0][0].split("-")[1];
-          // mark_dayの生成
-          if (gon.color_date[0][0].split("-")[2].split("")[0] == 0) {
-            // 一桁
-            var mark_day = gon.color_date[0][0].split("-")[2].split("")[1];
-          } else {
-            // 二桁
-            var mark_day = gon.color_date[0][0].split("-")[2];
-          }
+          while(gon.color_date[j] != undefined){
+            if(gon.color_date[j].length == 0){
+              break;
+            }
+            // mark_yearの生成
+            var mark_year = gon.color_date[eval("j")][0].split("-")[0];
+            // mark_monthの生成
+            var mark_month = gon.color_date[eval("j")][0].split("-")[1];
+            // mark_dayの生成
+            if (gon.color_date[eval("j")][0].split("-")[2].split("")[0] == 0) {
+              // 一桁
+              var mark_day = gon.color_date[eval("j")][0].split("-")[2].split("")[1];
+            } else {
+              // 二桁
+              var mark_day = gon.color_date[eval("j")][0].split("-")[2];
+            }
 
-          var j = 0;
-          while(gon.color_date[j] != null){
             if (t_year == mark_year && t_month == mark_month && j_i == mark_day){
               var continue_mark = $('<div class = "continue_mark">').text("　");
               $(".fc-widget-content[data-date ="+gon.color_date[j][0]+"]").append(continue_mark);
               $('.continue_mark').css("background", gon.color_array[gon.color_date[j][1]-1]);
             }
+
             j++;
           }
-
-
         }
 
       $(".mark_calendar").click(function(){
@@ -176,6 +115,10 @@
       //そのため、ここでは month - 1 は行いません
       var dt = new Date(year, month, 0);
       return dt.getDate();
+  }
+
+  function checker(user_id, group_id){
+    <% check_habit(current_user.id, @group_id) %>
   }
   </script>
 </div>

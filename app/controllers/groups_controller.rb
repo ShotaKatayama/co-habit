@@ -26,7 +26,6 @@ class GroupsController < ApplicationController
     }
     # この結果、color_dateは二重配列
     gon.color_date = @color_date
-
 =begin
 #Pusher用の記述
     Pusher.trigger('chat_event', 'my_event', {
