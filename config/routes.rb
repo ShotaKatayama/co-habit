@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       post 'pushercreate'
     end
   end
+  resources :continues, only: :create
 
 
 

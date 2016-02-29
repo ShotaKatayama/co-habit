@@ -8,6 +8,7 @@
   </div>
 
 
+
   <!-- 習慣カレンダーの表示 -->
   <h2>カレンダー</h2>
   <div id = "calendar">
@@ -26,9 +27,11 @@
   <% if Continue.exists?(:user_id => current_user.id, :group_id => @group_id, :created_day => Date.today) %>
     <button type="submit" disabled="disabled">実施済み</button>
   <% else %>
-      <%= button_tag "push", type: "submit", class: "mark_calendar button", onclick: "#{check_habit(current_user.id, @group_id)} "%>
+    <%= form_tag('/continues', :method  => :post, class: "mark_calendar button", :remote => true) do %>
+      <%= submit_tag "習慣の実行" %>
 
-      <%= button_tag "push", type: "submit", class: "mark_calendar button", onclick: "checker(#{current_user.id}, #{@group_id})"%>
+    <% check_habit(current_user.id, @group_id) %>
+    <% end %>
   <% end %>
 
   <%= link_to '一覧に戻る', "/users/#{current_user.id}", class: 'return_button button' %>
@@ -85,6 +88,7 @@
               var mark_day = gon.color_date[eval("j")][0].split("-")[2];
             }
 
+
             if (t_year == mark_year && t_month == mark_month && j_i == mark_day){
               var tag1 = '.continue_mark '
               var tag2 = '.'+gon.color_date[eval("j")][0]
@@ -104,11 +108,9 @@
         $('.newmark').css("background", gon.color_array[gon.user_color_index]);
 
         // ボタンの操作無効化
-        $(".mark_calendar").prop("disabled", true);
-        $(".mark_calendar").text("pushed");
+        $(".mark_calendar").html('<button type="submit" disabled="disabled">実施済み</button>');
       });
   });
-
 
   function getMonthEndDay(year, month) {
       //日付を0にすると前月の末日を指定したことになります
@@ -116,10 +118,6 @@
       //そのため、ここでは month - 1 は行いません
       var dt = new Date(year, month, 0);
       return dt.getDate();
-  }
-
-  function checker(user_id, group_id){
-    <% check_habit(current_user.id, @group_id) %>
   }
   </script>
 </div>

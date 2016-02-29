@@ -10,7 +10,6 @@ class GroupsController < ApplicationController
 
     @group_members = Manage.where("group_id  = #{@group_id}")
 
-
     @color_array = ["red", "blue", "green", "yellow", "pink", "purple"]
     gon.color_array = @color_array
 
@@ -20,14 +19,14 @@ class GroupsController < ApplicationController
     @drop_users = Drop.where(group_id: @group_id)
 
     # create_color_date()はuser_idとgroup_idを入れたら日付と色識別番号が配列で返ってくるメソッド
-    @color_date = []
-    @group_members.each{|member|
-        @color_date << create_color_date(member.user_id, member.group_id)
+    # @color_date = []
+    # @group_members.each{|member|
+    #     @color_date << create_color_date(member.user_id, member.group_id)
+    # }
+    # # この結果、color_dateは二重配列
 
-    }
-    # この結果、color_dateは二重配列
+    @color_date = create_color_date(Continue.where(group_id: @group_id))
     gon.color_date = @color_date
-
 
 =begin
 #Pusher用の記述
@@ -134,28 +133,19 @@ message: params[:message]}
     params.require(:group).permit(:group_name, :group_desc, :start_year, :end_year, :check_span, :check_span_counter)
   end
 
-  def color_index_create(user_id, group_id)
-    color_index = Manage.where(user_id: user_id, group_id: group_id)[0].group_num
-    return color_index
-  end
-
-  def continue_date_create(user_id, group_id)
-    continue_date = Continue.where(user_id: user_id, group_id: group_id)[0].created_day.to_date
-    return continue_date
-  end
-
-  def create_color_date(user_id, group_id)
-    # ハッシュ版
-    # color_date_set = {:"#{continue_date_create(user_id, group_id)}" => color_index_create(user_id, group_id)}
-
-    # 配列版 インデックス:0が日付、:1が色の識別番号
-    color_date_set =[]
-    unless Continue.where(user_id: user_id, group_id: group_id).empty?
-      color_date_set << continue_date_create(user_id, group_id)
-      color_date_set << color_index_create(user_id, group_id)
+  def create_color_date(continues_info)
+    color_date_set_ary =[]
+    unless continues_info.empty?
+      # created_dayだけが異なるレコードの配列に対してループ処理
+      continues_info.each{|continue_info|
+        color_date_set =[]
+        color_date_set << continue_info.created_day
+        color_date_set << continue_info.group_num
+        color_date_set_ary << color_date_set
+      }
     end
-
-    # 配列を返り値とする
-    return color_date_set
+    # 二次元配列を返り値とする
+    return color_date_set_ary
   end
+
 end

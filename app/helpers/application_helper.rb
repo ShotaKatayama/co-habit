@@ -1,8 +1,9 @@
 module ApplicationHelper
+    def check_habit(user_id, group_id)
+      group_num = Manage.where(user_id: user_id, group_id: group_id)[0].group_num
+      Continue.create(user_id: user_id, group_id: group_id, created_day: Date.today, group_num: group_num)
+    end
 
-  def check_habit(user_id, group_id)
-    Continue.create(user_id: user_id, group_id: group_id, created_day: Date.today)
-  end
 
   # 習慣の未実施回数の算出
   # 数えたいユーザーのidとそのグループidのdropsテーブルに存在するユーザーの一覧を引数とする
